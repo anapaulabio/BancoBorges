@@ -38,5 +38,15 @@
         "dataCadastro": 23,
         "atualizacaoCadastro": 23,
         "observacao": "nada"
+    },
+    {
+        "id": "97a6bf31-537b-45ae-ab5a-18d1e667c60a",
+        "razaoSocial": "Compranhia LTDA",
+        "cnpj": 2423546,
+        "endereco": "sifhiuse",
+        "limite": 123,
+        "dataCadastro": 621,
+        "atualizacaoCadastro": 54,
+        "observacao": "nada"
     }
 ]

@@ -23,12 +23,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Person = void 0;
+exports.deleteClient = exports.updateClient = exports.PersonPJ = exports.PersonPF = void 0;
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
 const clientes = require('../database/clientes.json');
 const crypto_1 = require("crypto");
-class Person {
+class PersonPF {
     constructor(nome, cpf, endereco, limite, dataCadastro, atualizacaoCadastro, observacao) {
         this.nome = nome;
         this.cpf = cpf;
@@ -41,7 +41,7 @@ class Person {
     listClient() {
         return console.log(clientes);
     }
-    createClient() {
+    createClientPF() {
         clientes.push({
             id: (0, crypto_1.randomUUID)(),
             nome: this.nome,
@@ -54,17 +54,48 @@ class Person {
         });
         fs.writeFileSync(path.resolve("src", "database", "clientes.json"), JSON.stringify(clientes));
     }
-    upClient(id) {
-        const clienteIndex = clientes.findIndex((clientes) => clientes.id === this.id);
-        clientes[clienteIndex] = Object.assign(Object.assign({}, clientes[clienteIndex]), { nome: this.nome, cpf: this.cpf, endereco: this.endereco, limite: this.limite, dataCadastro: this.dataCadastro, atualizacaoCadastro: this.atualizacaoCadastro, observacao: this.observacao });
-        return clientes;
+}
+exports.PersonPF = PersonPF;
+class PersonPJ {
+    constructor(razaoSocial, cnpj, endereco, limite, dataCadastro, atualizacaoCadastro, observacao) {
+        this.razaoSocial = razaoSocial;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+        this.limite = limite;
+        this.dataCadastro = dataCadastro;
+        this.atualizacaoCadastro = atualizacaoCadastro;
+        this.observacao = observacao;
     }
-    deleteClient(id) {
-        const clienteIndex = clientes.findIndex((clientes) => clientes.id === this.id);
-        clientes.splice(clienteIndex, 1);
+    listClient() {
+        return console.log(clientes);
+    }
+    createClientPJ() {
+        clientes.push({
+            id: (0, crypto_1.randomUUID)(),
+            razaoSocial: this.razaoSocial,
+            cnpj: this.cnpj,
+            endereco: this.endereco,
+            limite: this.limite,
+            dataCadastro: this.dataCadastro,
+            atualizacaoCadastro: this.atualizacaoCadastro,
+            observacao: this.observacao
+        });
         fs.writeFileSync(path.resolve("src", "database", "clientes.json"), JSON.stringify(clientes));
-        return (console.log("Cliente deletado com sucesso!"),
-            console.log(clientes));
     }
 }
-exports.Person = Person;
+exports.PersonPJ = PersonPJ;
+const updateClient = (id) => {
+    const clienteIndex = clientes.findIndex((cliente) => cliente.id === id);
+    clientes[clienteIndex] = Object.assign(Object.assign({}, clientes[clienteIndex]), { nome: clientes.nome, cpf: clientes.cpf, endereco: clientes.endereco, limite: clientes.limite, dataCadastro: clientes.dataCadastro, atualizacaoCadastro: clientes.atualizacaoCadastro, observacao: clientes.observacao });
+    fs.writeFileSync(path.resolve("src", "database", "clientes.json"), JSON.stringify(clientes));
+    return console.log("Cliente atualizado com sucesso!");
+};
+exports.updateClient = updateClient;
+const deleteClient = (id) => {
+    const clienteIndex = clientes.findIndex((clientes) => clientes.id === id);
+    clientes.splice(clienteIndex, 1);
+    fs.writeFileSync(path.resolve("src", "database", "clientes.json"), JSON.stringify(clientes));
+    return (console.log("Cliente deletado com sucesso!"),
+        console.log(clientes));
+};
+exports.deleteClient = deleteClient;

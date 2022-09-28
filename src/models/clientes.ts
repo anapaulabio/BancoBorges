@@ -17,16 +17,20 @@ interface PF extends Client {
     cpf: number;
 }
 
+interface PJ extends Client {
+    razaoSocial: string;
+    cnpj: number;
+}
 
-export class Person implements PF {
+export class PersonPF implements Client {
     id?: string
-    constructor(public nome: string, public cpf: number, public endereco: string, public limite: number, public dataCadastro: number, public atualizacaoCadastro: number, public observacao: string) { }
+    constructor(private nome: string, private cpf: number, public endereco: string, public limite: number, public dataCadastro: number, public atualizacaoCadastro: number, public observacao: string) { }
 
     listClient() {
         return console.log(clientes)
     }
 
-    createClient() {
+    createClientPF() {
         clientes.push({
             id: randomUUID(),
             nome: this.nome,
@@ -45,9 +49,36 @@ export class Person implements PF {
     }
 
 }
+export class PersonPJ implements Client {
+    id?: string
+    constructor(private razaoSocial: string, private cnpj: number, public endereco: string, public limite: number, public dataCadastro: number, public atualizacaoCadastro: number, public observacao: string) { }
+
+    listClient() {
+        return console.log(clientes)
+    }
+
+    createClientPJ() {
+        clientes.push({
+            id: randomUUID(),
+            razaoSocial: this.razaoSocial,
+            cnpj: this.cnpj,
+            endereco: this.endereco,
+            limite: this.limite,
+            dataCadastro: this.dataCadastro,
+            atualizacaoCadastro: this.atualizacaoCadastro,
+            observacao: this.observacao
+        })
+        fs.writeFileSync(
+            path.resolve("src", "database", "clientes.json"),
+            JSON.stringify(clientes)
+        )
+        
+    }
+
+}
 
 export const updateClient = (id: string) => {
-    const clienteIndex = clientes.findIndex((cliente: Person) => cliente.id === id);
+    const clienteIndex = clientes.findIndex((cliente: PersonPF) => cliente.id === id);
     clientes[clienteIndex] = {
         ...clientes[clienteIndex],
         nome: clientes.nome,

@@ -44,39 +44,35 @@ export class Person implements PF {
         
     }
 
-
-
-    updateClient(id: string) {
-        const clienteIndex = clientes.findIndex((clientes: any) => clientes.id === this.id);
-        clientes[clienteIndex] = {
-            ...clientes[clienteIndex],
-            nome: this.nome,
-            cpf: this.cpf,
-            endereco: this.endereco,
-            limite: this.limite,
-            dataCadastro: this.dataCadastro,
-            atualizacaoCadastro: this.atualizacaoCadastro,
-            observacao: this.observacao
-        }
-        fs.writeFileSync(
-            path.resolve("src", "database", "clientes.json"),
-            JSON.stringify(clientes)
-        )
-        return console.log("Cliente atualizado com sucesso!")
-
-    }
-
-    deleteClient(id: string) {
-        const clienteIndex = clientes.findIndex((clientes: any) => clientes.id === this.id)
-        clientes.splice(clienteIndex, 1)
-        fs.writeFileSync(
-            path.resolve("src", "database", "clientes.json"),
-            JSON.stringify(clientes)
-        )
-        return (
-            console.log("Cliente deletado com sucesso!"),
-            console.log(clientes)
-        )
-    }
 }
 
+export const updateClient = (id: string) => {
+    const clienteIndex = clientes.findIndex((cliente: Person) => cliente.id === id);
+    clientes[clienteIndex] = {
+        ...clientes[clienteIndex],
+        nome: clientes.nome,
+        cpf: clientes.cpf,
+        endereco: clientes.endereco,
+        limite: clientes.limite,
+        dataCadastro: clientes.dataCadastro,
+        atualizacaoCadastro: clientes.atualizacaoCadastro,
+        observacao: clientes.observacao
+    }
+    fs.writeFileSync(
+        path.resolve("src", "database", "clientes.json"),
+        JSON.stringify(clientes)
+    )
+    return console.log("Cliente atualizado com sucesso!")
+
+}
+export const deleteClient = (id: string) =>{
+    const clienteIndex = clientes.findIndex((clientes: any) => clientes.id === id)
+    clientes.splice(clienteIndex, 1)
+    fs.writeFileSync(
+        path.resolve("src", "database", "clientes.json"),
+        JSON.stringify(clientes)
+    )
+    return (
+        console.log("Cliente deletado com sucesso!"),
+        console.log(clientes)
+    )}

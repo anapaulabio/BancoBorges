@@ -1,5 +1,5 @@
 import readlineSync from "readline-sync";
-import { Person } from "./models/clientes";
+import { Person, deleteClient, updateClient } from "./models/clientes";
 
 //questões
 
@@ -17,11 +17,11 @@ import { Person } from "./models/clientes";
     cliente.createClient()
     cliente.listClient()
 
-    let idUpdate = readlineSync.question("Digite o ID do cliente que deseja atualizar: ")
-    cliente.updateClient(idUpdate)
+       
 
     let idDelete = readlineSync.question("Digite o ID do cliente que deseja deletar: ")
-    cliente.deleteClient(idDelete)
+    deleteClient(idDelete)
+  
     
 
 

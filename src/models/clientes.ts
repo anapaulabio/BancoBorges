@@ -1,8 +1,3 @@
-import * as fs from 'fs';
-import * as path from 'path';
-const clientes = require('../database/clientes.json')
-import { randomUUID } from "crypto";
-
 interface Client {
     id?: string;
     endereco: string;
@@ -22,88 +17,83 @@ interface PJ extends Client {
     cnpj: number;
 }
 
-export class PersonPF implements Client {
+class Person implements Client {
     id?: string
-    constructor(private nome: string, private cpf: number, public endereco: string, public limite: number, public dataCadastro: number, public atualizacaoCadastro: number, public observacao: string) { }
+    constructor(protected _client: Client) { }
 
-    listClient() {
-        return console.log(clientes)
+    get endereco(): string {
+       return this._client.endereco
     }
-
-    createClientPF() {
-        clientes.push({
-            id: randomUUID(),
-            nome: this.nome,
-            cpf: this.cpf,
-            endereco: this.endereco,
-            limite: this.limite,
-            dataCadastro: this.dataCadastro,
-            atualizacaoCadastro: this.atualizacaoCadastro,
-            observacao: this.observacao
-        })
-        fs.writeFileSync(
-            path.resolve("src", "database", "clientes.json"),
-            JSON.stringify(clientes)
-        )
-        
+    get limite(): number {
+        return this._client.limite
     }
-
-}
-export class PersonPJ implements Client {
-    id?: string
-    constructor(private razaoSocial: string, private cnpj: number, public endereco: string, public limite: number, public dataCadastro: number, public atualizacaoCadastro: number, public observacao: string) { }
-
-    listClient() {
-        return console.log(clientes)
+    get dataCadastro(): number {
+        return this._client.dataCadastro
     }
-
-    createClientPJ() {
-        clientes.push({
-            id: randomUUID(),
-            razaoSocial: this.razaoSocial,
-            cnpj: this.cnpj,
-            endereco: this.endereco,
-            limite: this.limite,
-            dataCadastro: this.dataCadastro,
-            atualizacaoCadastro: this.atualizacaoCadastro,
-            observacao: this.observacao
-        })
-        fs.writeFileSync(
-            path.resolve("src", "database", "clientes.json"),
-            JSON.stringify(clientes)
-        )
-        
+    get atualizacaoCadastro(): number {
+        return this._client.atualizacaoCadastro
     }
+    get observacao(): string {
+        return this._client.observacao
+    }
+    
+    
+    set endereco(endereco: string) {
+        this._client.endereco = endereco
+     }
+     set limite(limite: number){
+        this._client.limite = limite
+     }
+     set dataCadastro(dataCadastro: number) {
+        this._client.dataCadastro = dataCadastro
+     }
+     set atualizacaoCadastro(atualizacaoCadastro: number) {
+        this._client.atualizacaoCadastro = atualizacaoCadastro
+     }
+     set observacao(observacao: string) {
+        this._client.observacao = observacao
+     }
+
 
 }
 
-export const updateClient = (id: string) => {
-    const clienteIndex = clientes.findIndex((cliente: PersonPF) => cliente.id === id);
-    clientes[clienteIndex] = {
-        ...clientes[clienteIndex],
-        nome: clientes.nome,
-        cpf: clientes.cpf,
-        endereco: clientes.endereco,
-        limite: clientes.limite,
-        dataCadastro: clientes.dataCadastro,
-        atualizacaoCadastro: clientes.atualizacaoCadastro,
-        observacao: clientes.observacao
+class PersonPF extends Person implements PF {
+    constructor(private _pessoaFisica: PF) {
+        super(_pessoaFisica)
     }
-    fs.writeFileSync(
-        path.resolve("src", "database", "clientes.json"),
-        JSON.stringify(clientes)
-    )
-    return console.log("Cliente atualizado com sucesso!")
+
+    get nome(): string {
+        return this._pessoaFisica.nome
+    }
+    get cpf(): number {
+        return this._pessoaFisica.cpf
+    }
+    set nome(nome:string) {
+        this._pessoaFisica.nome = nome
+    }
+    set cpf(cpf:number) {
+        this._pessoaFisica.cpf = cpf
+    }
 
 }
-export const deleteClient = (id: string) =>{
-    const clienteIndex = clientes.findIndex((clientes: any) => clientes.id === id)
-    clientes.splice(clienteIndex, 1)
-    fs.writeFileSync(
-        path.resolve("src", "database", "clientes.json"),
-        JSON.stringify(clientes)
-    )
-    return (
-        console.log("Cliente deletado com sucesso!"),
-        console.log(clientes)
-    )}
+
+class PersonPJ extends Person implements PJ {
+    constructor(private _pessoaJuridica: PJ) {
+        super(_pessoaJuridica)
+    }
+
+    get razaoSocial(): string {
+        return this._pessoaJuridica.razaoSocial
+    }
+    get cnpj(): number {
+        return this._pessoaJuridica.cnpj
+    }
+    set razaoSocial(razaoSocial:string) {
+        this._pessoaJuridica.razaoSocial = razaoSocial
+    }
+    set cnpj(cnpj:number) {
+        this._pessoaJuridica.cnpj = cnpj
+    }
+
+}
+

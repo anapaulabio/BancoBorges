@@ -1,5 +1,5 @@
 import readlineSync from "readline-sync";
-import { PersonPF, PersonPJ } from "../models/clientes";
+import { PersonPF, PersonPJ, createClientPJ } from "../models/clientes";
 
 
 export const newClientPF = () => {
@@ -27,7 +27,7 @@ export const newClientPj = () => {
 
     let cliente = new PersonPJ(clienteRazao, Number(clienteCnpj), clienteEndereco, Number(clienteLimite), Number(clienteDataCadastro), Number(clienteDataAtualização), clienteObservacao)
     
-    cliente.createClientPJ()
+    return cliente
    }
  
 

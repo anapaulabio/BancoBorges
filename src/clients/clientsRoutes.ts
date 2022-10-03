@@ -18,7 +18,7 @@ export class ClientsRoutes extends CommonRoutesConfig {
                 clientsController.createClient
                 );
             
-            this.app.route('/clients/cpfCnpj')
+            this.app.route('/clients/:cpfCnpj')
             .all(clientsMiddlewares.validateClientExists)
             .get(clientsController.getClientById)
             .put(

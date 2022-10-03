@@ -6,12 +6,15 @@ import * as expressWinston from 'express-winston';
 import cors from 'cors';
 import { debug } from 'debug';
 
+import { CommonRoutesConfig } from './common/commonRoutes';
+import { ClientsRoutes } from './clients/clientsRoutes';
+
 
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const port = 3000;
-//const routes: CommonRoutesConfig[] = [];
+const routes: CommonRoutesConfig[] = [];
 const debugLog: debug.IDebugger = debug('app');
 
 app.use(express.json());
@@ -31,5 +34,17 @@ if(!process.env.DEBUG){
 
 app.use(expressWinston.logger(loggerOptions));
 
-//routes.push(new ClientsRoutes(app));
+routes.push(new ClientsRoutes(app));
 
+
+const runningMessage = `Servidor rodando na porta ${port}`;
+app.get('/', (req: express.Request, res: express.Response) => {
+    res.status(200).send(runningMessage);
+})
+
+server.listen(port, () => {
+    routes.forEach((route: CommonRoutesConfig) => {
+        debugLog(`Rotas configuradas para ${route.getName()}`);
+    });
+    console.log(runningMessage);
+});

@@ -41,7 +41,7 @@ class ClientsDAO {
             }
         })
 
-        this._clients.slice(indexId, 1);
+        this._clients.splice(indexId, 1);
     }
 
     list(): (ClientsDTO)[] {

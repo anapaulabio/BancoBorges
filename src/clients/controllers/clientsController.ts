@@ -1,0 +1,1 @@
+// O controller apenas direciona as requisições para as demais pastas

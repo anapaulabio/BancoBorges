@@ -12,18 +12,18 @@ class ClientsDAO {
         log('      Creating new instance of ClientDao')
     }
 
-    register(person: ClientsDTO): ClientsDTO {
+    create(person: ClientsDTO): ClientsDTO {
         let objectPerson
         person.indexId = this._clients.length;
-        objectPerson = person 
+        objectPerson = person ;
         this._clients.push(objectPerson);
 
         return objectPerson;
     }
 
     update(person: ClientsDTO): ClientsDTO | undefined {
-        let objectPerson 
-        objectPerson = person
+        let objectPerson ;
+        objectPerson = person;
 
         if(objectPerson.indexId === undefined) {
             return;
@@ -50,7 +50,7 @@ class ClientsDAO {
         for(let client of this._clients){
             objectPerson.push(client);
         }
-        return objectPerson
+        return objectPerson;
     }
     
     search(cpfCnpj: number): ClientsDTO | undefined {
@@ -65,9 +65,9 @@ class ClientsDAO {
         if(!client){ 
             return;
         }
-        return client    
+        return client ;   
     }
 
 }
 
-export default ClientsDAO
+export default new ClientsDAO(); 

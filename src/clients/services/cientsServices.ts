@@ -1,1 +1,0 @@
-// contem as regras de negócio da api

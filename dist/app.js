@@ -40,7 +40,8 @@ const routes = [];
 const debugLog = (0, debug_1.debug)('app');
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
-const loggerOptions = { transports: [new winston.transports.Console()],
+const loggerOptions = {
+    transports: [new winston.transports.Console()],
     format: winston.format.combine(winston.format.json(), winston.format.prettyPrint(), winston.format.colorize({ all: true })),
 };
 if (!process.env.DEBUG) {

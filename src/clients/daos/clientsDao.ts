@@ -9,7 +9,7 @@ class ClientsDAO {
 
     constructor () {
         this._clients = [];
-        log('      Creating new instance of ClientDao')
+        log('Creating new instance of ClientDao')
     }
 
     create(person: ClientsDTO): ClientsDTO {
@@ -31,16 +31,16 @@ class ClientsDAO {
         this._clients[objectPerson.indexId] = objectPerson;
         return objectPerson;
     }
-
     delete(cpfCnpj: number): void {
-        const indexId = this._clients.findIndex((obj: ClientsDTO) => {
-            if('cpf' in obj) {
-                return obj.cpf === cpfCnpj;
-            } else {
-                return obj.cnpj === cpfCnpj;
-            }
-        })
 
+        const indexId = this._clients.findIndex((obj: ClientsDTO) => {
+            if('cpf' in obj)
+                return obj.cpf === cpfCnpj;
+            else   
+                return obj.cnpj === cpfCnpj;
+        });
+        
+        log(`Delete Index: ${indexId}`);
         this._clients.splice(indexId, 1);
     }
 
@@ -54,18 +54,18 @@ class ClientsDAO {
     }
     
     search(cpfCnpj: number): ClientsDTO | undefined {
-        const client = this._clients.find((obj: ClientsDTO) => {
-            if('cpf' in obj) {
-                return obj.cpf === cpfCnpj;
-            } else {
-                return obj.cnpj === cpfCnpj;
-            }
-        })
 
-        if(!client){ 
+        const cliente = this._clients.find((obj: ClientsDTO) => {
+            if('cpf' in obj)
+                return obj.cpf === cpfCnpj;
+            else   
+                return obj.cnpj === cpfCnpj;
+        });
+
+        if(!cliente)
             return;
-        }
-        return client ;   
+
+        return cliente;
     }
 
 }

@@ -8,17 +8,17 @@ class ClientsService implements CRUD {
     async create(resource: ClientsDTO): Promise<ClientsDTO> {
         return ClientsDAO.create(resource)
     }
-    async deleteById(resourceID: number): Promise<void> {
-        return ClientsDAO.delete(resourceID)
+    async deleteById(resourceId: number): Promise<void> {
+        return ClientsDAO.delete(resourceId)
     }
     async list(): Promise<ClientsDTO[]> {
         return ClientsDAO.list()
     }
-    async updateById (resourceID: ClientsDTO): Promise<ClientsDTO | undefined> {
-        return ClientsDAO.update(resourceID)
+    async updateById(resource: ClientsDTO): Promise<ClientsDTO | undefined> {
+        return ClientsDAO.update(resource)
     }
-    async readById(resourceID: number): Promise<ClientsDTO | undefined> {
-        return ClientsDAO.search(resourceID)
+    async readById(resourceId: number): Promise<ClientsDTO | undefined> {
+        return ClientsDAO.search(resourceId)
     }
 }
 

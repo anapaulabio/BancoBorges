@@ -20,7 +20,8 @@ const debugLog: debug.IDebugger = debug('app');
 app.use(express.json());
 app.use(cors());
 
-const loggerOptions: expressWinston.LoggerOptions = { transports: [new winston.transports.Console()],
+const loggerOptions: expressWinston.LoggerOptions = { 
+    transports: [new winston.transports.Console()],
     format: winston.format.combine(
         winston.format.json(),
         winston.format.prettyPrint(),

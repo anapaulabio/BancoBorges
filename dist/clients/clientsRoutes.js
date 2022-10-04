@@ -15,7 +15,7 @@ class ClientsRoutes extends commonRoutes_1.CommonRoutesConfig {
         this.app.route('/clients')
             .get(clientsController_1.default.listClients)
             .post(clientsMiddlewares_1.default.validateRequiredClientBodyFields, clientsMiddlewares_1.default.validateClientRepeated, clientsController_1.default.createClient);
-        this.app.route('/clients/cpfCnpj')
+        this.app.route('/clients/:cpfCnpj')
             .all(clientsMiddlewares_1.default.validateClientExists)
             .get(clientsController_1.default.getClientById)
             .put(clientsMiddlewares_1.default.validateRequiredClientBodyFields, clientsController_1.default.updateClient)

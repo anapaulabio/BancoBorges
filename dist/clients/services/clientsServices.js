@@ -9,17 +9,17 @@ class ClientsService {
     async create(resource) {
         return clientsDao_1.default.create(resource);
     }
-    async deleteById(resourceID) {
-        return clientsDao_1.default.delete(resourceID);
+    async deleteById(resourceId) {
+        return clientsDao_1.default.delete(resourceId);
     }
     async list() {
         return clientsDao_1.default.list();
     }
-    async updateById(resourceID) {
-        return clientsDao_1.default.update(resourceID);
+    async updateById(resource) {
+        return clientsDao_1.default.update(resource);
     }
-    async readById(resourceID) {
-        return clientsDao_1.default.search(resourceID);
+    async readById(resourceId) {
+        return clientsDao_1.default.search(resourceId);
     }
 }
 exports.default = new ClientsService();

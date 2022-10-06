@@ -11,7 +11,7 @@ class ClientsController {
         res.status(200).send(clients);
     }
     async getClientById(req: express.Request, res: express.Response){
-        const clients = await clientsServices.readById(Number(req.params.clientId));
+        const clients = await clientsServices.readById(Number(req.params.cpfCnpj));
         res.status(200).send(clients);
     }
     async createClient(req: express.Request, res: express.Response){
@@ -23,7 +23,7 @@ class ClientsController {
         res.status(200).send(clients);
     }
     async deleteClient(req: express.Request, res: express.Response){
-        const clients = await clientsServices.deleteById(Number(req.params.clientsId));
+        const clients = await clientsServices.deleteById(Number(req.params.cpfCnpj));
         res.status(204).send;
     }
 }

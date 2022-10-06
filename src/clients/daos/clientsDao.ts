@@ -4,7 +4,7 @@ import { ClientsDTO } from "../dtos/clientsDtos";
 
 const log: debug.IDebugger = debug('app:in-memory-dao') 
 
-export class ClientsDAO {
+class ClientsDAO {
     private _clients: ClientsDTO[];
     private static _instance: ClientsDAO
 
@@ -13,7 +13,7 @@ export class ClientsDAO {
         log('Creating new instance of ClientDao')
     }
 
-    static get instance(): ClientsDAO {
+    static getInstance(): ClientsDAO {
         if(!ClientsDAO._instance){
             ClientsDAO._instance = new ClientsDAO()
         }
@@ -78,4 +78,4 @@ export class ClientsDAO {
 
 }
 
- 
+export default ClientsDAO.getInstance()

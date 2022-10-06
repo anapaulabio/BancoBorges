@@ -1,24 +1,24 @@
 // contem as regras de negócio da api
 
-import {ClientsDAO}  from "../daos/clientsDao";
-import { CRUD } from '../../common/interfaces/crudInterfaces';
+import ClientsDAO  from "../daos/clientsDao";
+import { CRUD } from '../../common/interfaces/crud/crudInterfaces';
 import { ClientsDTO } from "../dtos/clientsDtos";
 
 class ClientsService implements CRUD {
     async create(resource: ClientsDTO): Promise<ClientsDTO> {
-        return ClientsDAO.instance.create(resource)
+        return ClientsDAO.create(resource)
     }
     async deleteById(resourceId: number): Promise<void> {
-        return ClientsDAO.instance.delete(resourceId)
+        return ClientsDAO.delete(resourceId)
     }
     async list(): Promise<ClientsDTO[]> {
-        return ClientsDAO.instance.list()
+        return ClientsDAO.list()
     }
     async updateById(resource: ClientsDTO): Promise<ClientsDTO | undefined> {
-        return ClientsDAO.instance.update(resource)
+        return ClientsDAO.update(resource)
     }
     async readById(resourceId: number): Promise<ClientsDTO | undefined> {
-        return ClientsDAO.instance.search(resourceId)
+        return ClientsDAO.search(resourceId)
     }
 }
 

@@ -1,7 +1,7 @@
 import { ClientsEntity } from "../../entities/clients/client.entity";
 import { IClientsRepository } from "../../repositories/clients.repository.interface";
 import ClientsRepository from "../../../adapters/repositories/clients.repository";
-import { IUseCase } from "..//interface.usecase";
+import { IUseCase } from "../interface.usecase";
 
 class ListClientUseCase implements IUseCase {
 

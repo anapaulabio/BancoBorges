@@ -4,9 +4,7 @@ import { IUseCase } from "../interface.usecase";
 
 class DeleteClientUseCase implements IUseCase {
 
-    constructor(private _repository: IClientsRepository) {
-
-    }
+    constructor(private _repository: IClientsRepository) {}
 
     async execute(data: { clientId: number }): Promise<void> {
         return await this._repository.deleteById(data.clientId);

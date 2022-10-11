@@ -27,7 +27,7 @@ export class ArrayDatabase implements IDatabase {
         obj = data;
         this._data[type].push(obj);
 
-        return obj.indexId;
+        return obj.indexId
     }
 
     update(type: string, data: any): boolean {
@@ -66,7 +66,6 @@ export class ArrayDatabase implements IDatabase {
                 return obj.indexId === dataId;
         });
         
-
         if(indexId === undefined)
             return false;
 

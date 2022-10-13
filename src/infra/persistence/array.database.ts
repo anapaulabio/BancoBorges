@@ -63,7 +63,7 @@ export class ArrayDatabase implements IDatabase {
         }
 
         const indexId = this._data.findIndex((obj: any) => {
-                return obj.indexId === dataId;
+            return obj.indexId === dataId;
         });
         
         if(indexId === undefined)

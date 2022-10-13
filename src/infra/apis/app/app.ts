@@ -6,9 +6,9 @@ import * as expressWinston from 'express-winston';
 import cors from 'cors';
 import { debug } from 'debug';
 
-import { CommonRoutesConfig } from './adapters/apis/routes/common.routes.config';
-import { ClientsRoutes } from './adapters/apis/routes/clients.routes';
-import { AccountsRoutes } from './adapters/apis/routes/accounts.routes';
+import { CommonRoutesConfig } from '../../../adapters/apis/routes/common.routes.config';
+import { ClientsRoutes } from '../../../adapters/apis/routes/clients.routes';
+import { AccountsRoutes } from '../../../adapters/apis/routes/accounts.routes';
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
@@ -48,3 +48,4 @@ server.listen(port, () => {
     });
     console.log(runningMessage);
 });
+

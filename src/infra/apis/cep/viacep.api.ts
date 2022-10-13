@@ -1,5 +1,5 @@
-import { IAddressEntity } from '../../domain/entities/clients/address.entity';
-import { Cep } from '../../adapters/connectors/cep.interface';
+import { IAddressEntity } from '../../../domain/entities/clients/address.entity';
+import { Cep } from '../../../adapters/connectors/cep.interface';
 import fetch from "node-fetch";
 
 export class ViaCep implements Cep {

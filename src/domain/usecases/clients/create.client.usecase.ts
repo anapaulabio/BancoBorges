@@ -2,8 +2,8 @@ import { ClientsEntity } from "../../entities/clients/client.entity";
 import { IClientsRepository } from "../../repositories/clients.repository.interface";
 import ClientsRepository from "../../../adapters/repositories/clients.repository";
 import { IUseCase } from "../interface.usecase";
-import { ViaCepFactory } from "../../../infra/apis/viacep.factory";
-import { ApiCepFactory } from "../../../infra/apis/apicep.factory";
+import { ViaCepFactory } from "../../../infra/apis/cep/viacep.factory";
+import { ApiCepFactory } from "../../../infra/apis/cep/apicep.factory";
 import { CepFactory } from "../../../adapters/connectors/cep.factory";
 
 class CreateClientUseCase implements IUseCase {

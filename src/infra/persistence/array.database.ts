@@ -62,7 +62,7 @@ export class ArrayDatabase implements IDatabase {
             return false;
         }
 
-        const indexId = this._data.findIndex((obj: any) => {
+        const indexId = this._data[type].findIndex((obj: any) => {
             return obj.indexId === dataId;
         });
         
@@ -84,9 +84,10 @@ export class ArrayDatabase implements IDatabase {
                 return obj.indexId === dataId;
         });
 
-        if(!data)
-            return false;
-
+        if(!data){
+            return false
+        }
+        
         return data;
     }
 }

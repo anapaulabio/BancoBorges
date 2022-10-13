@@ -6,7 +6,8 @@ test("Teste unitário CreateClientUseCase", async () => {
         name: "algum",
         cpf: 123456,
         creditLimit: 1000,
-        comments: "algo"
+        comments: "algo",
+        cep: "48730000",
     }
     expect(await createClientUsecase.execute(client)).toMatchObject(client)
 })

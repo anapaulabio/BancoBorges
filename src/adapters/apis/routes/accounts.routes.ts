@@ -18,7 +18,7 @@ export class AccountsRoutes extends CommonRoutesConfig {
                 AccountsController.createAccount,
             );
 
-            this.app.route(`/accounts/:accountNumber`)
+            this.app.route(`/accounts/:accountId`)
                         .all(AccountsMiddleware.validateAccountExists)
                         .get(AccountsController.getAccountById)
                         .put(

@@ -20,7 +20,7 @@ class AccountsRepository implements IAccountsRepository {
     }
 
     async deleteById(resourceId: number): Promise<void> {
-        this._database.create(this._type, resourceId);
+        this._database.delete(this._type, resourceId);
     }
 
     async list(): Promise<AccountEntity[]> {

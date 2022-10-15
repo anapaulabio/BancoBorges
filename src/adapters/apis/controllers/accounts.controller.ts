@@ -27,6 +27,7 @@ class AccountsController {
 
     async createAccount(req: express.Request, res: express.Response) {
         const account = await createAccountUsecase.execute(req.body);
+        log(account);
         res.status(201).send(account);
     }
 

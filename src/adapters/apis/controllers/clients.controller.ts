@@ -24,6 +24,7 @@ class ClientsController {
 
     async createClient(req: express.Request, res: express.Response) {
         const client = await createClientUsecase.execute(req.body);
+        log(client);
         res.status(201).send(client);
     }
 

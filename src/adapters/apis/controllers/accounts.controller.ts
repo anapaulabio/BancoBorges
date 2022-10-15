@@ -7,6 +7,9 @@ import listAccountUsecase from '../../../domain/usecases/accounts/list.account.u
 import depositAccountUsecase from '../../../domain/usecases/accounts/deposit.account.usecase';
 import withdrawAccountUsecase from '../../../domain/usecases/accounts/withdraw.account.usecase';
 import transferAccountUsecase from '../../../domain/usecases/accounts/transfer.account.usecase';
+import debug from 'debug';
+
+const log: debug.IDebugger = debug('app:accounts-controller');
 
 
 class AccountsController { 

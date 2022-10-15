@@ -4,6 +4,9 @@ import readClientUsecase from '../../../domain/usecases/clients/read.client.usec
 import updateClientUsecase from '../../../domain/usecases/clients/update.client.usecase';
 import deleteClientUsecase from '../../../domain/usecases/clients/delete.client.usecase';
 import listClientUsecase from '../../../domain/usecases/clients/list.client.usecase';
+import debug from 'debug';
+
+const log: debug.IDebugger = debug('app:clients-controller');
 
 
 class ClientsController {

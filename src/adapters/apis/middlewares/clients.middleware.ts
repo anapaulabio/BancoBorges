@@ -1,5 +1,8 @@
 import express from 'express';
 import ReadClientUsecase from '../../../domain/usecases/clients/read.client.usecase';
+import debug from 'debug';
+
+const log: debug.IDebugger = debug('app:clients-middleware');
 
 class ClientsMiddleware {
     async validateRequiredClientBodyFields(req: express.Request, res: express.Response, next: express.NextFunction){

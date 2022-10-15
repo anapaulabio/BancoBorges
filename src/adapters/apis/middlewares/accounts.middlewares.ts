@@ -1,6 +1,9 @@
 import express from 'express';
 import readClientUsecase from '../../../domain/usecases/clients/read.client.usecase';
 import readAccountUsecase from '../../../domain/usecases/accounts/read.account.usecase';
+import debug from 'debug';
+
+const log: debug.IDebugger = debug('app:accounts-middleware');
 
 
 class AccountsMiddleware {

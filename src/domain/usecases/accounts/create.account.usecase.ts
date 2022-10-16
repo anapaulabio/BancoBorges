@@ -3,7 +3,7 @@ import { IAccountsRepository } from "../../repositories/accounts.repository.inte
 import accountsRepository from "../../../adapters/repositories/accounts.repository";
 import { IUseCase } from "../interface.usecase";
 
-class CreateAccountUseCase implements IUseCase {
+export class CreateAccountUseCase implements IUseCase {
 
     constructor(private _repository: IAccountsRepository) {}
 

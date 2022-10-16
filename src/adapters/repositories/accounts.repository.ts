@@ -3,7 +3,7 @@ import { AccountEntity } from "../../domain/entities/accounts/account.entity"
 import { ArrayDatabase } from "../../infra/persistence/array.database";
 import { IAccountsRepository } from "../../domain/repositories/accounts.repository.interface";
 
-class AccountsRepository implements IAccountsRepository {
+export class AccountsRepository implements IAccountsRepository {
     private _type: string = 'account';
 
     constructor(private _database: IDatabase){

@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "sucrase-node src/infra/apis/app/app.ts",
-    "start": "node --unhandled-rejections=strict sucrase-node src/infra/apis/app/app.ts",
-    "debug": "set DEBUG=* && npm run start",
+    "debug": "set DEBUG=* && npm run dev",
     "test": "jest"
   },
   "repository": {

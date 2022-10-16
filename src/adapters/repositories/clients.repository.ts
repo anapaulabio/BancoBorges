@@ -3,12 +3,10 @@ import { ClientsEntity } from "../../domain/entities/clients/client.entity"
 import { ArrayDatabase } from "../../infra/persistence/array.database";
 import { IClientsRepository } from "../../domain/repositories/clients.repository.interface";
 
-class ClientsRepository implements IClientsRepository {
+export class ClientsRepository implements IClientsRepository {
     private _type: string = 'client';
 
-    constructor(private _database: IDatabase){
-
-    }
+    constructor(private _database: IDatabase){}
 
     async readById(resourceId: number): Promise<ClientsEntity | undefined> {
         return this._database.read(this._type, resourceId);

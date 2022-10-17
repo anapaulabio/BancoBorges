@@ -1,7 +1,7 @@
 export interface IDatabase {
-    list(type: string): any[],
-    create(type: string, data: any): number,
-    read(type: string, dataId: number): any,
-    update(type: string, data: any): boolean,
-    delete(type: string, dataId: number): boolean
+    list(type: any): any[],
+    create(type: any, data: any): any,
+    read(type: any, dataId: any): any,
+    update(type: any, data: any): any,
+    delete(type: any, dataId: any): any
 }

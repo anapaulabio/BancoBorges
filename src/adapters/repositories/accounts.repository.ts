@@ -1,38 +1,111 @@
-import { IDatabase } from "../../infra/persistence/database.interface";
-import { AccountEntity } from "../../domain/entities/accounts/account.entity"
-import { ArrayDatabase } from "../../infra/persistence/array.database";
+import * as Sequelize from "sequelize";
+
+import { IDatabaseModel } from "../../infra/persistence/databasemodel.interface";
+import { AccountEntity } from "../../domain/entities/accounts/account.entity";
+import { MysqlDataBase } from "../../infra/persistence/mysql/mysql.database";
 import { IAccountsRepository } from "../../domain/repositories/accounts.repository.interface";
 
+import accountModel from "../../infra/persistence/mysql/models/accounts.models/account.models";
+import checkingModel from "../../infra/persistence/mysql/models/accounts.models/checking.models";
+import savingModel from "../../infra/persistence/mysql/models/accounts.models/saving.models";
+import entityToModelAccount from "../../infra/persistence/mysql/helpers/accounts/entityToModel.account.mysql";
+import modelToEntityAccount from "../../infra/persistence/mysql/helpers/accounts/modelToEntity.account.mysql";
+
 export class AccountsRepository implements IAccountsRepository {
-    private _type: string = 'account';
+    constructor(
+        private _database: IDatabaseModel,
+        private _accountModel: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
+        private _chekingAccountModel: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
+        private _savingAccountModel: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
+    ) {
+        this._accountModel.hasOne(this._chekingAccountModel, {
+            foreignKey: 'accountid',
+            as: 'checkingAccount'
+        });
 
-    constructor(private _database: IDatabase){
-
+        this._accountModel.hasOne(this._savingAccountModel, {
+            foreignKey: 'accountid',
+            as: 'savingAccount'
+        })
     }
 
     async readById(resourceId: number): Promise<AccountEntity | undefined> {
-        return this._database.read(this._type, resourceId);
+        try {
+        const account = await this._database.read(this._accountModel, resourceId, {
+            include: [
+                'checkingAccount',
+                'savingAccount',
+            ]
+        });
+
+        return modelToEntityAccount(account);
+    } catch (error) {
+        console.error('Algo deu errado', error)
+    }
     }
 
     async create(resource: AccountEntity): Promise<AccountEntity> {
-        resource.indexId = this._database.create(this._type, resource);
-        return resource;
+        const { Account, checkingAccount, savingAccount } = entityToModelAccount(resource); 
+        const accountModel = await this._database.create(this._accountModel, Account);
+        
+        if(checkingAccount){
+            checkingAccount.accountid = accountModel.null
+            const checkingAccountModel = await this._database.create(this._chekingAccountModel, checkingAccount)
+        }
+
+        if(savingAccount){
+            savingAccount.accountid = accountModel.null
+            const savingAccountModel = await this._database.create(this._savingAccountModel, savingAccount)
+        }
+
+        resource.indexId = accountModel.null
+        return resource
     }
 
     async deleteById(resourceId: number): Promise<void> {
-        this._database.delete(this._type, resourceId);
+        this._database.delete(this._chekingAccountModel, {accountid: resourceId});
+        this._database.delete(this._savingAccountModel, {accountid: resourceId});
+        this._database.delete(this._accountModel, {accountid: resourceId});
     }
 
     async list(): Promise<AccountEntity[]> {
-        return this._database.list(this._type);
+        const accountModel = await this._database.list(this._accountModel, {
+            include: [
+                'checkingAccount',
+                'savingAccount',
+            ]
+        });
+        const account = accountModel.map(modelToEntityAccount)
+
+        return account
     }
 
     async updateById(resource: AccountEntity): Promise<AccountEntity | undefined> {
-        this._database.update(this._type, resource);
+        const accountModel = await this._database.read(this._accountModel, resource.indexId!, {
+            include: [
+                'checkingAccount',
+                'savingAccount',
+            ]
+        });
+
+        const { Account, checkingAccount, savingAccount } = entityToModelAccount(resource);
+
+        await this._database.update(accountModel, Account);
+
+        if(checkingAccount){
+            await this._database.update(accountModel.getCheckingAccount(), checkingAccount)
+        }
+        if(savingAccount){
+            await this._database.update(accountModel.getSavingAccount(), savingAccount)
+        }
+
         return resource;
     }
 }
 
 export default new AccountsRepository(
-    ArrayDatabase.getInstance()
-    );
+    MysqlDataBase.getInstance(),
+    accountModel,
+    checkingModel,
+    savingModel
+);

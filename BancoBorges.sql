@@ -1,0 +1,84 @@
+CREATE DATABASE `banco_borges` ;
+USE `banco_borges`;
+
+DROP TABLE IF EXISTS `person`;
+CREATE TABLE `person` (
+  `personid` int NOT NULL AUTO_INCREMENT,
+  `cep` varchar(8) NOT NULL,
+  `creditlimit` int NOT NULL DEFAULT '0',
+  `dateRegister` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `dateUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `comment` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  PRIMARY KEY (`personid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `address`;
+CREATE TABLE `address` (
+  `addressid` int NOT NULL AUTO_INCREMENT,
+  `cep` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `logradouro` varchar(255) DEFAULT NULL,
+  `complemento` varchar(255) DEFAULT NULL,
+  `bairro` varchar(255) NOT NULL,
+  `cidade` varchar(255) NOT NULL,
+  `estado` varchar(255) NOT NULL,
+  `personid` int NOT NULL,
+  PRIMARY KEY (`addressid`),
+  KEY `personid` (`personid`),
+  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`personid`) REFERENCES `person` (`personid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `physical_person`;
+CREATE TABLE `physical_person` (
+  `physical_personid` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `cpf` varchar(20) NOT NULL,
+  `personid` int NOT NULL,
+  PRIMARY KEY (`physical_personid`),
+  KEY `personid` (`personid`),
+  CONSTRAINT `physical_person_ibfk_1` FOREIGN KEY (`personid`) REFERENCES `person` (`personid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+DROP TABLE IF EXISTS `legal_person`;
+CREATE TABLE `legal_person` (
+  `legal_personid` int NOT NULL AUTO_INCREMENT,
+  `socialReason` varchar(255) NOT NULL,
+  `cnpj` varchar(14) NOT NULL,
+  `personid` int NOT NULL,
+  PRIMARY KEY (`legal_personid`),
+  KEY `personid` (`personid`),
+  CONSTRAINT `legal_person_ibfk_1` FOREIGN KEY (`personid`) REFERENCES `person` (`personid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE `account` (
+    `accountid` int NOT NULL AUTO_INCREMENT,
+    `agency` int NOT NULL,
+    `accountnumber` int NOT NULL,
+    `balance` double NOT NULL,
+    `personid` int NOT NULL,
+    PRIMARY KEY (`accountid`),
+    KEY `personid` (`personid`),
+    CONSTRAINT `account_ibfk_1` FOREIGN KEY (`personid`) REFERENCES `person` (`personid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `checking_account`;
+CREATE TABLE `checking_account` (
+   `checking_accountid` int NOT NULL AUTO_INCREMENT,
+   `tax` float NOT NULL,
+   `transferlimit` float NOT NULL, 
+   `accountid` int NOT NULL,
+   PRIMARY KEY (`checking_accountid`),
+   KEY `accountid`(`accountid`),
+   CONSTRAINT `checking_account_ibfk_1` FOREIGN KEY (`accountid`) REFERENCES `account` (`accountid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `saving_account`;
+CREATE TABLE `saving_account` (
+   `saving_accountid` int NOT NULL AUTO_INCREMENT,
+   `income` float NOT NULL,
+   `accountid` int NOT NULL,
+   PRIMARY KEY (`saving_accountid`),
+   KEY `accountid`(`accountid`),
+   CONSTRAINT `saving_account_ibfk_1` FOREIGN KEY (`accountid`) REFERENCES `account` (`accountid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

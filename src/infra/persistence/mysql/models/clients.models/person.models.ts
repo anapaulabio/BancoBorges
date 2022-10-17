@@ -1,13 +1,13 @@
 import { MysqlDataBase } from '../../mysql.database';
-import { DataTypes } from 'sequelize';
+import * as Sequelize from 'sequelize';
 
 export default MysqlDataBase.getInstance().createModel('person', {
     indexId: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.DataTypes.INTEGER,
         primaryKey: true,
         field: 'personid'
     },
-    cep: DataTypes.STRING,
-    creditLimit: DataTypes.NUMBER,
-    comments: DataTypes.TEXT
+    cep: Sequelize.DataTypes.STRING,
+    creditLimit: Sequelize.DataTypes.NUMBER,
+    comments: Sequelize.DataTypes.TEXT
 });

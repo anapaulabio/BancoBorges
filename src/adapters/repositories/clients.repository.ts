@@ -22,7 +22,7 @@ export class ClientsRepository implements IClientsRepository {
     ) {
         this._personModel.hasOne(this._physicalPersonModel, {
             foreignKey: 'personid',
-            as: 'physicalPeson' 
+            as: 'physicalPerson' 
         });
 
         this._personModel.hasMany(this._legalPersonModel, {

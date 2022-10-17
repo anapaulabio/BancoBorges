@@ -16,15 +16,22 @@ export class ClientsRoutes extends CommonRoutesConfig {
                 ClientsMiddleware.validateClientRepeated,
                 ClientsController.createClient
             );
+        
+        this.app.route(`/clients/bulk`)
+            .post(
+                ClientsMiddleware.uploadFile().single('file'),
+                ClientsMiddleware.parseXlsx,
+                ClientsController.createClientBulk
+            )
 
-            this.app.route(`/clients/:clientId`)
-                        .all(ClientsMiddleware.validateClientExists)
-                        .get(ClientsController.getClientById)
-                        .put(
-                            ClientsMiddleware.validateRequiredClientBodyFields,
-                            ClientsController.updateClient
-                        )
-                        .delete(ClientsController.removeClient);
+        this.app.route(`/clients/:clientId`)
+            .all(ClientsMiddleware.validateClientExists)
+            .get(ClientsController.getClientById)
+            .put(
+                ClientsMiddleware.validateRequiredClientBodyFields,
+                ClientsController.updateClient
+            )
+                .delete(ClientsController.removeClient);
 
         return this.app;
     }

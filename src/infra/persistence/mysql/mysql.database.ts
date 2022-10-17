@@ -7,21 +7,21 @@ export class MysqlDataBase implements IDatabaseModel {
     private _username: string;
     private _password: string;
     private _host: string;
-    private _dialect: string;
+    private _dialect: Sequelize.Dialect;
     private _port: number;
     private _adapter: Sequelize.Sequelize
 
     private constructor() {
-        this._db = "",
-        this._username = "",
-        this._password = "",
-        this._host = "",
+        this._db = "banco_borges",
+        this._username = "root",
+        this._password = "Root1993",
+        this._host = "localhost",
         this._dialect = 'mysql',
-        this._port = 0,
+        this._port = 3306,
 
-        this._adapter = new Sequelize.Sequelize(this._host, this._username, this._password, {
+        this._adapter = new Sequelize.Sequelize(this._db, this._username, this._password, {
             host: this._host,
-         //   dialect: this._dialect,
+            dialect: this._dialect,
             port: this._port
             })
     }

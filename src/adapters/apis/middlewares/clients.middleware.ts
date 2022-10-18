@@ -5,6 +5,7 @@ import multer from 'multer';
 
 import ReadClientUsecase from '../../../domain/usecases/clients/read.client.usecase';
 import xlsxFiles from '../../../infra/files/xlsx.files';
+import logger from '../../../infra/logs/winston.logs';
 
 
 const log: debug.IDebugger = debug('app:clients-middleware');
@@ -23,8 +24,10 @@ class ClientsMiddleware {
             clientId: Number(req.params.clientId)
         })
         if (client) {
+            logger.info(['Cliente encontrado: ', client])
             next()
         } else {
+            logger.error(`Usuário ${req.params.clientId} não existe`)
             res.status(404).send({error: `Usuário ${req.params.clientId} não existe`});
         }
     }

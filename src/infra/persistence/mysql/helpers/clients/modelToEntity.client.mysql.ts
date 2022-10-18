@@ -25,12 +25,12 @@ export default function (people: any): ClientsEntity | undefined {
         }
     }
 
-    if(people.physicalpeople){
-        (client as IPhysicalPeopleEntity).name = people.physicalpeople.name
-        (client as IPhysicalPeopleEntity).cpf = people.physicalpeople.cpf
-    } else if(people.legalpeople){
-        (client as ILegalPeopleEntity).socialReason = people.legalpeople.socialReason
-        (client as ILegalPeopleEntity).cnpj = people.legalpeople.cnpj
+    if(people.physicalPeople){
+        (client as IPhysicalPeopleEntity).name = people.physicalPeople.name
+        (client as IPhysicalPeopleEntity).cpf = people.physicalPeople.cpf
+    } else if(people.legalPeople){
+        (client as ILegalPeopleEntity).socialReason = people.legalPeople.socialReason
+        (client as ILegalPeopleEntity).cnpj = people.legalPeople.cnpj
     } else {
         return
     }

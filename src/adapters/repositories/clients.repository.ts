@@ -8,7 +8,7 @@ import { IClientsRepository } from "../../domain/repositories/clients.repository
 import peopleModels from "../../infra/persistence/mysql/models/clients.models/people.models";
 import physicalModels from "../../infra/persistence/mysql/models/clients.models/physical.models";
 import legalModels from "../../infra/persistence/mysql/models/clients.models/legal.models";
-import addressModels from "../../infra/persistence/mysql/models/clients.models/address.models";
+import addressesModels from "../../infra/persistence/mysql/models/clients.models/address.models";
 import entityToModel from "../../infra/persistence/mysql/helpers/clients/entityToModel.client.mysql";
 import modelToEntity from "../../infra/persistence/mysql/helpers/clients/modelToEntity.client.mysql";
 
@@ -53,22 +53,22 @@ export class ClientsRepository implements IClientsRepository {
     }
 
     async create(resource: ClientsEntity): Promise<ClientsEntity> {
-       const { people, physicalpeople, legalpeople, address } = entityToModel(resource)
+       const { people, physicalPeople, legalPeople, addresses } = entityToModel(resource)
        const peopleModel = await this._database.create(this._peopleModel, people)
 
-       if(physicalpeople){
-        physicalpeople.peopleid = peopleModel.null;
-        const physicalpeopleModel = await this._database.create(this._physicalpeopleModel, physicalpeople)
+       if(physicalPeople){
+        physicalPeople.peopleid = peopleModel.null;
+        const physicalpeopleModel = await this._database.create(this._physicalpeopleModel, physicalPeople)
        }
 
-       if(legalpeople){
-        legalpeople.peopleid = peopleModel.null;
-        const legalpeopleModel = await this._database.create(this._legalpeopleModel, legalpeople)
+       if(legalPeople){
+        legalPeople.peopleid = peopleModel.null;
+        const legalpeopleModel = await this._database.create(this._legalpeopleModel, legalPeople)
        }
 
-       if(address){
-        address.peopleid = peopleModel.null;
-        const addressModel = await this._database.create(this._addressModel, address)
+       if(addresses){
+        addresses.peopleid = peopleModel.null;
+        const addressModel = await this._database.create(this._addressModel, addresses)
        }
 
        resource.indexId = peopleModel.null
@@ -106,18 +106,18 @@ export class ClientsRepository implements IClientsRepository {
             ]
         });
 
-        const { people, physicalpeople, legalpeople, address } = entityToModel(resource)
+        const { people, physicalPeople, legalPeople, addresses } = entityToModel(resource)
 
         await this._database.update(peopleModel, people)
 
-        if(physicalpeople){
-            await this._database.update(peopleModel.getPhysicalpeople(), physicalpeople)
+        if(physicalPeople){
+            await this._database.update(peopleModel.getPhysicalpeople(), physicalPeople)
         }
-        if(legalpeople){
-            await this._database.update(peopleModel.getLegalpeople(), legalpeople)
+        if(legalPeople){
+            await this._database.update(peopleModel.getLegalpeople(), legalPeople)
         }
-        if(address){
-            await this._database.update(peopleModel.getAddress(), address)
+        if(addresses){
+            await this._database.update(peopleModel.getAddress(), addresses)
         }
         return resource;
     }
@@ -128,5 +128,5 @@ export default new ClientsRepository(
     peopleModels,
     physicalModels,
     legalModels,
-    addressModels
+    addressesModels
 );

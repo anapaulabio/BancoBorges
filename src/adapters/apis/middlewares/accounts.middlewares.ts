@@ -2,6 +2,7 @@ import express from 'express';
 import readClientUsecase from '../../../domain/usecases/clients/read.client.usecase';
 import readAccountUsecase from '../../../domain/usecases/accounts/read.account.usecase';
 import debug from 'debug';
+import logger from '../../../infra/logs/winston.logs';
 
 const log: debug.IDebugger = debug('app:accounts-middleware');
 
@@ -20,8 +21,10 @@ class AccountsMiddleware {
             clientId: Number(req.body.clientId)
         });
         if (user) {
+            logger.info(['Cliente encontrado', user])
             next();
         } else {
+            logger.error(`Usuário ${req.body.clientId} não existe`)
             res.status(404).send({error: `Usuário ${req.body.clientId} não existe`});
         }
     }

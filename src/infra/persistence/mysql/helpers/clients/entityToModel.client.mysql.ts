@@ -8,18 +8,18 @@ export default function (client: ClientsEntity) {
         comments: client.comments
     }
 
-    let physicalpeople = undefined
+    let physicalPeople = undefined
     if ('cpf' in client){
-        physicalpeople = {
+        physicalPeople = {
             peopleid: undefined,
             name: client.name,
             cpf: client.cpf
         }
     }
 
-    let legalpeople = undefined
+    let legalPeople = undefined
     if ('cnpj' in client){
-        legalpeople = {
+        legalPeople = {
             peopleid: undefined,
             socialReason: client.socialReason,
             cnpj: client.cnpj
@@ -33,8 +33,8 @@ export default function (client: ClientsEntity) {
 
     return {
         people: people,
-        physicalpeople: physicalpeople,
-        legalpeople: legalpeople,
+        physicalPeople: physicalPeople,
+        legalPeople: legalPeople,
         addresses: addresses
     }
 }

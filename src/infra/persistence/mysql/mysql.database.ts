@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { IDatabaseModel } from '../databasemodel.interface';
+import databaseConfig from '../../config/database.config';
 
 export class MysqlDataBase implements IDatabaseModel {
     private static _instance: MysqlDataBase;
@@ -12,12 +13,12 @@ export class MysqlDataBase implements IDatabaseModel {
     private _adapter: Sequelize.Sequelize
 
     private constructor() {
-        this._db = "banco_borges",
-        this._username = "root",
-        this._password = "Root1993",
-        this._host = "localhost",
-        this._dialect = 'mysql',
-        this._port = 3306,
+        this._db = databaseConfig.db!;
+        this._username = databaseConfig.username!;
+        this._password = databaseConfig.password!;
+        this._host = databaseConfig.host!;
+        this._dialect = 'mysql';
+        this._port = Number(databaseConfig.port);
 
         this._adapter = new Sequelize.Sequelize(this._db, this._username, this._password, {
             host: this._host,
@@ -42,8 +43,8 @@ export class MysqlDataBase implements IDatabaseModel {
         return model.save();
     }
 
-    list(model: Sequelize.ModelCtor<Sequelize.Model<any,any>>, data: any): any {
-        return model.findAll(data);
+    list(model: Sequelize.ModelCtor<Sequelize.Model<any,any>>, includes: object): any {
+        return model.findAll(includes);
     }
 
     async delete(model: Sequelize.ModelCtor<Sequelize.Model<any,any>>, dataWhere: Sequelize.WhereOptions<any>): Promise<any> {
@@ -53,7 +54,7 @@ export class MysqlDataBase implements IDatabaseModel {
         return (result > 0)
     }
 
-    read(model: Sequelize.ModelCtor<Sequelize.Model<any,any>>, dataId: number, includes?: object): any {
+    read(model: Sequelize.ModelCtor<Sequelize.Model<any,any>>, dataId: number, includes: object): any {
         try {
             return model.findByPk(dataId, includes);
         } catch (error) {

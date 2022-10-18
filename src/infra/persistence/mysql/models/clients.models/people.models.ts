@@ -1,11 +1,11 @@
 import { MysqlDataBase } from '../../mysql.database';
 import * as Sequelize from 'sequelize';
 
-export default MysqlDataBase.getInstance().createModel('person', {
+export default MysqlDataBase.getInstance().createModel('people', {
     indexId: {
         type: Sequelize.DataTypes.INTEGER,
         primaryKey: true,
-        field: 'personid'
+        field: 'peopleid'
     },
     cep: Sequelize.DataTypes.STRING,
     creditLimit: Sequelize.DataTypes.NUMBER,

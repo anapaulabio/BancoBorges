@@ -1,4 +1,4 @@
-import { ILegalPersonEntity } from "./legalperson.entity";
-import { IPhysicalPersonEntity } from "./physical.entity";
+import { ILegalpeopleEntity } from "./legalpeople.entity";
+import { IPhysicalpeopleEntity } from "./physical.entity";
 
-export type ClientsEntity = IPhysicalPersonEntity | ILegalPersonEntity
+export type ClientsEntity = IPhysicalpeopleEntity | ILegalpeopleEntity

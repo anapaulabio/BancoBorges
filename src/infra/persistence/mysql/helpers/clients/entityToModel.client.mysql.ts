@@ -1,42 +1,40 @@
 import { ClientsEntity } from "../../../../../domain/entities/clients/client.entity";
 
 export default function (client: ClientsEntity) {
-    const person = {
+    const people = {
         indexId: client.indexId,
-        address: client.address,
+        cep: client.cep,
         creditLimit: client.creditLimit,
         comments: client.comments
     }
 
-    let physicalPerson = undefined
+    let physicalpeople = undefined
     if ('cpf' in client){
-        physicalPerson = {
-            personid: undefined,
+        physicalpeople = {
+            peopleid: undefined,
             name: client.name,
             cpf: client.cpf
         }
     }
 
-    let legalPerson = undefined
+    let legalpeople = undefined
     if ('cnpj' in client){
-        legalPerson = {
-            personid: undefined,
+        legalpeople = {
+            peopleid: undefined,
             socialReason: client.socialReason,
             cnpj: client.cnpj
         }
     }
 
-    let address = undefined
-    if ('address' in client){
-        address = {
-            ...client.address, ...{personid: undefined}
-        }
+    let addresses = undefined
+    if ('addresses' in client){
+        addresses = {...client.addresses, ...{peopleid: undefined} }
     }
 
     return {
-        person: person,
-        physicalPerson: physicalPerson,
-        legalPerson: legalPerson,
-        address: address
+        people: people,
+        physicalpeople: physicalpeople,
+        legalpeople: legalpeople,
+        addresses: addresses
     }
 }

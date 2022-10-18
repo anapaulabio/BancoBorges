@@ -1,6 +1,6 @@
-import { IPersonEntity } from "./person.entity";
+import { IPeopleEntity } from "./people.entity";
 
-export interface IPhysicalPersonEntity extends IPersonEntity {
+export interface IPhysicalPeopleEntity extends IPeopleEntity {
     name: string;
     cpf: number;
 }

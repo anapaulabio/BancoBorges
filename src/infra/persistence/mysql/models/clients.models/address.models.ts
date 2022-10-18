@@ -1,7 +1,7 @@
 import { MysqlDataBase } from "../../mysql.database";
 import * as Sequelize from 'sequelize';
 
-export default MysqlDataBase.getInstance().createModel('address', {
+export default MysqlDataBase.getInstance().createModel('addresses', {
     addressid: {
         type: Sequelize.DataTypes.INTEGER,
         primaryKey: true

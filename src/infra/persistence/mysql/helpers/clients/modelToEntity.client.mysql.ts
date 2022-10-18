@@ -1,36 +1,36 @@
 import { ClientsEntity } from "../../../../../domain/entities/clients/client.entity";
-import { IPersonEntity } from "../../../../../domain/entities/clients/person.entity";
-import { IPhysicalPersonEntity } from "../../../../../domain/entities/clients/physical.entity";
-import { ILegalPersonEntity } from "../../../../../domain/entities/clients/legalperson.entity";
+import { IPeopleEntity } from "../../../../../domain/entities/clients/people.entity";
+import { IPhysicalPeopleEntity } from "../../../../../domain/entities/clients/physical.entity";
+import { ILegalPeopleEntity } from "../../../../../domain/entities/clients/legalpeople.entity";
 
-export default function (person: any): ClientsEntity | undefined{
-    if(!person)
+export default function (people: any): ClientsEntity | undefined {
+    if(!people)
     return;
     
-    let client: IPersonEntity = {
-        indexId: person.indexId,
-        cep: person.cep,
-        creditLimit: person.creditLimit,
-        comments: person.comments
+    let client: IPeopleEntity = {
+        indexId: people.indexId,
+        cep: people.cep,
+        creditLimit: people.creditLimit,
+        comments: people.comments,
     }
 
-    if(person.address){
-        client.address = {
-            cep: person.address.cep,
-            logradouro: person.address.logradouro,
-            complemento: person.address.complemento,
-            bairro: person.address.bairro,
-            cidade: person.address.cidade,
-            estado: person.address.estado
+    if(people.addresses){
+        client.addresses = {
+            cep: people.addresses.cep,
+            logradouro: people.addresses.logradouro,
+            complemento: people.addresses.complemento,
+            bairro: people.addresses.bairro,
+            cidade: people.addresses.cidade,
+            estado: people.addresses.estado
         }
     }
 
-    if(person.physicalperson){
-        (client as IPhysicalPersonEntity).name = person.physicalPerson.name
-        (client as IPhysicalPersonEntity).cpf = person.physicalPerson.cpf
-    } else if(person.legalperson){
-        (client as ILegalPersonEntity).socialReason = person.legalPerson.socialReason
-        (client as ILegalPersonEntity).cnpj = person.legalPerson.cnpj
+    if(people.physicalpeople){
+        (client as IPhysicalPeopleEntity).name = people.physicalpeople.name
+        (client as IPhysicalPeopleEntity).cpf = people.physicalpeople.cpf
+    } else if(people.legalpeople){
+        (client as ILegalPeopleEntity).socialReason = people.legalpeople.socialReason
+        (client as ILegalPeopleEntity).cnpj = people.legalpeople.cnpj
     } else {
         return
     }

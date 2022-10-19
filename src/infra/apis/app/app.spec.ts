@@ -9,7 +9,7 @@ describe("Testes integrados de clientes",  () => {
             "cpf": 1234567891,
             "creditLimit": 50,
             "comments": "como escrever data",
-            "cep": 48730000,
+            "cep": "48730000",
         };
 
         const res = await supertest(app).post('/clients')

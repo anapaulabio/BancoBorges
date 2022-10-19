@@ -8,6 +8,7 @@ test("teste unitario de depositAccountUsecase", async () => {
             agency: 10,
             accountNumber: 11234,
             balance: 1000,
+            transferLimit: 100,
             tax: 5             
         }
         await createAccountUsecase.execute(account)

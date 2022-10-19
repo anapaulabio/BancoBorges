@@ -14,7 +14,7 @@ export default function (account: AccountEntity){
         checkingAccount = {
             accountid: undefined,
             tax: account.tax,
-            tranferLimit: account.transferLimit
+            transferLimit: account.transferLimit
         }
     }
 

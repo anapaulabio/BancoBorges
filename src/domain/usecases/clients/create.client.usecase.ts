@@ -13,10 +13,10 @@ export class CreateClientUseCase implements IUseCase {
     }
 
     async execute(data: ClientsEntity): Promise<ClientsEntity | undefined> {
-       data.address = await this._viaCep.preencheEndereco(data.cep);
+       data.addresses = await this._viaCep.preencheEndereco(data.cep);
         
-       if(!data.address){
-            data.address = await this._apiCep.preencheEndereco(data.cep);
+       if(!data.addresses){
+            data.addresses = await this._apiCep.preencheEndereco(data.cep);
         } 
         return await this._repository.create(data);
     }

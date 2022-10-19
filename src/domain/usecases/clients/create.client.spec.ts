@@ -15,8 +15,8 @@ test("Teste unitário CreateClientUseCase", async () => {
         "cpf": 1234567891,
         "creditLimit": 50,
         "comments": "como escrever data",
-        "cep": 48730000,
-        "address": {
+        "cep": "48730000",
+        "addresses": {
             "cep":"48730-000",
             "logradouro": "",
             "complemento": "",
@@ -30,7 +30,7 @@ test("Teste unitário CreateClientUseCase", async () => {
         "cpf": 1234567891,
         "creditLimit": 50,
         "comments": "como escrever data",
-        "cep": 48730000,
+        "cep": "48730000",
     }
 
     const createClientUsecase = new CreateClientUseCase(

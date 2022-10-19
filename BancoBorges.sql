@@ -12,8 +12,8 @@ CREATE TABLE `people` (
   PRIMARY KEY (`peopleid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `address`;
-CREATE TABLE `address` (
+DROP TABLE IF EXISTS `addresses`;
+CREATE TABLE `addresses` (
   `addressid` int NOT NULL AUTO_INCREMENT,
   `cep` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `logradouro` varchar(255) DEFAULT NULL,
@@ -50,8 +50,8 @@ CREATE TABLE `legal_people` (
   CONSTRAINT `legal_people_ibfk_1` FOREIGN KEY (`peopleid`) REFERENCES `people` (`peopleid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `account`;
-CREATE TABLE `account` (
+DROP TABLE IF EXISTS `accountss`;
+CREATE TABLE `accounts` (
     `accountid` int NOT NULL AUTO_INCREMENT,
     `agency` int NOT NULL,
     `accountnumber` int NOT NULL,
@@ -62,23 +62,23 @@ CREATE TABLE `account` (
     CONSTRAINT `account_ibfk_1` FOREIGN KEY (`peopleid`) REFERENCES `people` (`peopleid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `checking_account`;
-CREATE TABLE `checking_account` (
+DROP TABLE IF EXISTS `checking_accounts`;
+CREATE TABLE `checking_accounts` (
    `checking_accountid` int NOT NULL AUTO_INCREMENT,
    `tax` float NOT NULL,
-   `transferlimit` float NOT NULL, 
+   `transfer_limit` double NOT NULL, 
    `accountid` int NOT NULL,
    PRIMARY KEY (`checking_accountid`),
    KEY `accountid`(`accountid`),
-   CONSTRAINT `checking_account_ibfk_1` FOREIGN KEY (`accountid`) REFERENCES `account` (`accountid`)
+   CONSTRAINT `checking_account_ibfk_1` FOREIGN KEY (`accountid`) REFERENCES `accounts` (`accountid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `saving_account`;
-CREATE TABLE `saving_account` (
+DROP TABLE IF EXISTS `saving_accounts`;
+CREATE TABLE `saving_accounts` (
    `saving_accountid` int NOT NULL AUTO_INCREMENT,
    `income` float NOT NULL,
    `accountid` int NOT NULL,
    PRIMARY KEY (`saving_accountid`),
    KEY `accountid`(`accountid`),
-   CONSTRAINT `saving_account_ibfk_1` FOREIGN KEY (`accountid`) REFERENCES `account` (`accountid`)
+   CONSTRAINT `saving_account_ibfk_1` FOREIGN KEY (`accountid`) REFERENCES `accounts` (`accountid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

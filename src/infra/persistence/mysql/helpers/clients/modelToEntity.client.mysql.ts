@@ -26,13 +26,13 @@ export default function (people: any): ClientsEntity | undefined {
     }
 
     if(people.physicalPeople){
-        (client as IPhysicalPeopleEntity).name = people.physicalPeople.name
-        (client as IPhysicalPeopleEntity).cpf = people.physicalPeople.cpf
+        (client as IPhysicalPeopleEntity).name = people.physicalPeople.name;
+        (client as IPhysicalPeopleEntity).cpf = people.physicalPeople.cpf;
     } else if(people.legalPeople){
-        (client as ILegalPeopleEntity).socialReason = people.legalPeople.socialReason
-        (client as ILegalPeopleEntity).cnpj = people.legalPeople.cnpj
+        (client as ILegalPeopleEntity).socialReason = people.legalPeople.socialReason;
+        (client as ILegalPeopleEntity).cnpj = people.legalPeople.cnpj;
     } else {
-        return
+        return;
     }
 
     return (client as ClientsEntity);

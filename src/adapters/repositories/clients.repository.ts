@@ -16,23 +16,23 @@ export class ClientsRepository implements IClientsRepository {
     constructor(
         private _database: IDatabaseModel,
         private _peopleModel: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
-        private _physicalpeopleModel: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
-        private _legalpeopleModel: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
+        private _physicalPeopleModel: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
+        private _legalPeopleModel: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
         private _addressModel: Sequelize.ModelCtor<Sequelize.Model<any, any>>
     ){
-        this._peopleModel.hasOne(this._physicalpeopleModel, {
+        this._peopleModel.hasOne(this._physicalPeopleModel, {
             foreignKey: 'peopleid',
-            as: 'physicalpeople' 
+            as: 'physicalPeople' 
         });
 
-        this._peopleModel.hasOne(this._legalpeopleModel, {
+        this._peopleModel.hasOne(this._legalPeopleModel, {
             foreignKey: 'peopleid',
-            as: 'legalpeople'
+            as: 'legalPeople'
         });
 
         this._peopleModel.hasOne(this._addressModel, {
             foreignKey: 'peopleid',
-            as: 'address'
+            as: 'addresses'
         });
     }
 
@@ -40,9 +40,9 @@ export class ClientsRepository implements IClientsRepository {
        try {
         const people = await this._database.read(this._peopleModel, resourceId, {
             include: [
-                'physicalpeople',
-                'legalpeople',
-                'address',
+                'physicalPeople',
+                'legalPeople',
+                'addresses',
             ]
         });
 
@@ -58,12 +58,12 @@ export class ClientsRepository implements IClientsRepository {
 
        if(physicalPeople){
         physicalPeople.peopleid = peopleModel.null;
-        const physicalpeopleModel = await this._database.create(this._physicalpeopleModel, physicalPeople)
+        const physicalPeopleModel = await this._database.create(this._physicalPeopleModel, physicalPeople)
        }
 
        if(legalPeople){
         legalPeople.peopleid = peopleModel.null;
-        const legalpeopleModel = await this._database.create(this._legalpeopleModel, legalPeople)
+        const legalPeopleModel = await this._database.create(this._legalPeopleModel, legalPeople)
        }
 
        if(addresses){
@@ -77,18 +77,18 @@ export class ClientsRepository implements IClientsRepository {
     }
 
     async deleteById(resourceId: number): Promise<void> {
-        this._database.delete(this._physicalpeopleModel, {peopleid: resourceId});
-        this._database.delete(this._legalpeopleModel, {peopleid: resourceId});
+        this._database.delete(this._physicalPeopleModel, {peopleid: resourceId});
+        this._database.delete(this._legalPeopleModel, {peopleid: resourceId});
         this._database.delete(this._addressModel, {peopleid: resourceId});
-        this._database.delete(this._peopleModel, {peopleid: resourceId});
+        this._database.delete(this._peopleModel, {indexId: resourceId});
     }
 
     async list(): Promise<ClientsEntity[]> {
         const people = await this._database.list(this._peopleModel, {
             include: [
-                'physicalpeople',
-                'legalpeople',
-                'address'
+                'physicalPeople',
+                'legalPeople',
+                'addresses'
             ]
         });
 
@@ -100,9 +100,9 @@ export class ClientsRepository implements IClientsRepository {
     async updateById(resource: ClientsEntity): Promise<ClientsEntity | undefined> {
         const peopleModel = await this._database.read(this._peopleModel, resource.indexId!, {
             include: [
-                'physicalpeople',
-                'legalpeople',
-                'address'
+                'physicalPeople',
+                'legalPeople',
+                'addresses'
             ]
         });
 
@@ -111,13 +111,13 @@ export class ClientsRepository implements IClientsRepository {
         await this._database.update(peopleModel, people)
 
         if(physicalPeople){
-            await this._database.update(peopleModel.getPhysicalpeople(), physicalPeople)
+            await this._database.update(peopleModel.getPhysicalPeople(), physicalPeople)
         }
         if(legalPeople){
-            await this._database.update(peopleModel.getLegalpeople(), legalPeople)
+            await this._database.update(peopleModel.getLegalPeople(), legalPeople)
         }
         if(addresses){
-            await this._database.update(peopleModel.getAddress(), addresses)
+            await this._database.update(peopleModel.getAddresses(), addresses)
         }
         return resource;
     }

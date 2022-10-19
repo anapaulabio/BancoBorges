@@ -1,9 +1,9 @@
-import { IAddressEntity } from '../../../domain/entities/clients/address.entity';
+import { IAddressesEntity } from '../../../domain/entities/clients/address.entity';
 import { Cep } from '../../../adapters/connectors/cep.interface';
 import fetch from "node-fetch";
 
 export class ViaCep implements Cep {
-    public async buscaEndereco(cep: string): Promise<IAddressEntity | undefined> {
+    public async buscaEndereco(cep: string): Promise<IAddressesEntity | undefined> {
         try{
             const responseCep = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
         

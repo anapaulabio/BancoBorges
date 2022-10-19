@@ -65,7 +65,7 @@ export class AccountsRepository implements IAccountsRepository {
     async deleteById(resourceId: number): Promise<void> {
         this._database.delete(this._chekingAccountModel, {accountid: resourceId});
         this._database.delete(this._savingAccountModel, {accountid: resourceId});
-        this._database.delete(this._accountModel, {accountid: resourceId});
+        this._database.delete(this._accountModel, {indexId: resourceId});
     }
 
     async list(): Promise<AccountEntity[]> {

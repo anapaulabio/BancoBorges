@@ -13,12 +13,13 @@ export class MysqlDataBase implements IDatabaseModel {
     private _adapter: Sequelize.Sequelize
 
     private constructor() {
-        this._db = "banco_borges";
-        this._username = "root";
-        this._password = "Root1993";
-        this._host = "localhost";
-        this._dialect = 'mysql';
-        this._port = 3306;
+        console.log(databaseConfig);
+        this._db = databaseConfig.database;
+        this._username = databaseConfig.username;
+        this._password = databaseConfig.password;
+        this._host = databaseConfig.host;
+        this._dialect = databaseConfig.dialect as Sequelize.Dialect;
+        this._port = databaseConfig.port;
 
         this._adapter = new Sequelize.Sequelize(this._db, this._username, this._password, {
             host: this._host,

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "sucrase-node src/infra/apis/app/app.ts",
-    "start": "tsc && node --unhandled-rejections=strict -r dotenv/config ./dist/infra/apis/app/app.js dotenv_config_path=/custom/path/to/.env dotenv_config_debug=true",
+    "start": "tsc && node --unhandled-rejections=strict -r dotenv/config ./dist/infra/apis/app/app.js",
     "debug": "set DEBUG=* && npm run start",
     "test": "jest"
   },
@@ -30,6 +30,7 @@
     "@types/multer": "^1.4.7",
     "@types/node": "^18.8.2",
     "@types/node-fetch": "^2.6.2",
+    "@types/winston": "^2.4.4",
     "babel-jest": "^29.1.2",
     "express-winston": "^4.2.0",
     "jest": "^29.1.2",
@@ -51,6 +52,9 @@
     "node-fetch": "^2.6.6",
     "nodeenv": "^3.0.75",
     "sequelize": "^6.25.2",
+    "sequelize-cli": "^6.5.2",
+    "sequelize-typescript": "^2.1.5",
+    "ts-node": "^10.9.1",
     "winston": "^3.8.2",
     "xlsx": "^0.18.5"
   }

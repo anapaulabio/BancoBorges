@@ -1,6 +1,7 @@
+const path = require('path');
+
 import express from 'express';
 import debug from 'debug';
-import path from 'path';
 import multer from 'multer';
 
 import ReadClientUsecase from '../../../domain/usecases/clients/read.client.usecase';

@@ -8,7 +8,7 @@ export default function (people: any): ClientsEntity | undefined {
     return;
     
     let client: IPeopleEntity = {
-        indexId: people.indexId,
+        peopleId: people.peopleId,
         cep: people.cep,
         creditLimit: people.creditLimit,
         comments: people.comments,

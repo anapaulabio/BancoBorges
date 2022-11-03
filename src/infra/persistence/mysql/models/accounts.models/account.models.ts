@@ -2,19 +2,19 @@ import { MysqlDataBase } from "../../mysql.database";
 import { DataTypes } from "sequelize";
 
 export default MysqlDataBase.getInstance().createModel('accounts', {
-    indexId: {
+    accountId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        field: 'accountid'
+        field: 'account_id'
     },
     clientId: {
         type: DataTypes.INTEGER,
-        field: 'peopleid'
+        field: 'people_id'
     },
     agency: DataTypes.NUMBER,
     accountNumber: {
         type: DataTypes.NUMBER,
-        field: 'accountnumber'
+        field: 'account_number'
     },
     balance: DataTypes.NUMBER,
 })

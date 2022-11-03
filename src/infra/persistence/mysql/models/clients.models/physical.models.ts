@@ -2,12 +2,12 @@ import { MysqlDataBase } from "../../mysql.database";
 import * as Sequelize from 'sequelize';
 
 export default MysqlDataBase.getInstance().createModel('physical_people', {
-    physicalpeopleid: {
+    physicalpeopleId: {
         type: Sequelize.DataTypes.INTEGER,
         primaryKey: true,
-        field: 'physical_peopleid',
+        field: 'physical_people_id',
     },
-    peopleid: Sequelize.DataTypes.INTEGER,
+    peopleId: Sequelize.DataTypes.INTEGER,
     name: Sequelize.DataTypes.STRING,
     cpf: Sequelize.DataTypes.STRING
 })

@@ -1,5 +1,5 @@
 export interface IGeneralAccountEntity {
-    indexId?: number,
+    accountId?: number,
     clientId: number,
     agency: number,
     accountNumber: number,

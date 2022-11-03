@@ -2,7 +2,7 @@ import { ClientsEntity } from "../../../../../domain/entities/clients/client.ent
 
 export default function (client: ClientsEntity) {
     const people = {
-        indexId: client.indexId,
+        peopleId: client.peopleId,
         cep: client.cep,
         creditLimit: client.creditLimit,
         comments: client.comments
@@ -11,7 +11,7 @@ export default function (client: ClientsEntity) {
     let physicalPeople = undefined
     if ('cpf' in client){
         physicalPeople = {
-            peopleid: undefined,
+            peopleId: undefined,
             name: client.name,
             cpf: client.cpf
         }
@@ -20,7 +20,7 @@ export default function (client: ClientsEntity) {
     let legalPeople = undefined
     if ('cnpj' in client){
         legalPeople = {
-            peopleid: undefined,
+            peopleId: undefined,
             socialReason: client.socialReason,
             cnpj: client.cnpj
         }
@@ -28,7 +28,7 @@ export default function (client: ClientsEntity) {
 
     let addresses = undefined
     if ('addresses' in client){
-        addresses = {...client.addresses, ...{peopleid: undefined} }
+        addresses = {...client.addresses, ...{peopleId: undefined} }
     }
 
     return {

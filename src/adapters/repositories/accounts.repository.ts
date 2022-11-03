@@ -19,12 +19,12 @@ export class AccountsRepository implements IAccountsRepository {
         private _savingAccountModel: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
     ) {
         this._accountModel.hasOne(this._chekingAccountModel, {
-            foreignKey: 'accountid',
+            foreignKey: 'accountId',
             as: 'checkingAccount'
         });
 
         this._accountModel.hasOne(this._savingAccountModel, {
-            foreignKey: 'accountid',
+            foreignKey: 'accountId',
             as: 'savingAccount'
         })
     }
@@ -49,23 +49,23 @@ export class AccountsRepository implements IAccountsRepository {
         const accountModel = await this._database.create(this._accountModel, Account);
         
         if(checkingAccount){
-            checkingAccount.accountid = accountModel.null
+            checkingAccount.accountId = accountModel.null
             const checkingAccountModel = await this._database.create(this._chekingAccountModel, checkingAccount)
         }
 
         if(savingAccount){
-            savingAccount.accountid = accountModel.null
+            savingAccount.accountId = accountModel.null
             const savingAccountModel = await this._database.create(this._savingAccountModel, savingAccount)
         }
 
-        resource.indexId = accountModel.null
+        resource.accountId = accountModel.null
         return resource
     }
 
     async deleteById(resourceId: number): Promise<void> {
-        this._database.delete(this._chekingAccountModel, {accountid: resourceId});
-        this._database.delete(this._savingAccountModel, {accountid: resourceId});
-        this._database.delete(this._accountModel, {indexId: resourceId});
+        this._database.delete(this._chekingAccountModel, {accountId: resourceId});
+        this._database.delete(this._savingAccountModel, {accountId: resourceId});
+        this._database.delete(this._accountModel, {accountId: resourceId});
     }
 
     async list(): Promise<AccountEntity[]> {
@@ -81,7 +81,7 @@ export class AccountsRepository implements IAccountsRepository {
     }
 
     async updateById(resource: AccountEntity): Promise<AccountEntity | undefined> {
-        const accountModel = await this._database.read(this._accountModel, resource.indexId!, {
+        const accountModel = await this._database.read(this._accountModel, resource.accountId!, {
             include: [
                 'checkingAccount',
                 'savingAccount',

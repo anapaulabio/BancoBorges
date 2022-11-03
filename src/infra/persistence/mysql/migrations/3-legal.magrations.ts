@@ -3,13 +3,13 @@ import * as Sequelize from 'sequelize';
 export default {
     up: (queryInterface: Sequelize.QueryInterface) => {
         return queryInterface.createTable('legal_people', {
-            legalPeopleid: {
+            legalPeopleId: {
                 type: Sequelize.DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
-                field: 'legal_peopleid'
+                field: 'legal_people_id'
             },
-            peopleid: {
+            peopleId: {
                 type: Sequelize.DataTypes.INTEGER,
                 references: {
                     model: {

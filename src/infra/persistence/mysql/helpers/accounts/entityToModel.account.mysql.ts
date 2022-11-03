@@ -2,7 +2,7 @@ import { AccountEntity } from "../../../../../domain/entities/accounts/account.e
 
 export default function (account: AccountEntity){
     const Account = {
-        indexId: account.indexId,
+        accountId: account.accountId,
         clientId: account.clientId,
         agency: account.agency,
         accountNumber: account.accountNumber,
@@ -12,7 +12,7 @@ export default function (account: AccountEntity){
     let checkingAccount = undefined;
     if('tax' in account){
         checkingAccount = {
-            accountid: undefined,
+            accountId: undefined,
             tax: account.tax,
             transferLimit: account.transferLimit
         }
@@ -21,7 +21,7 @@ export default function (account: AccountEntity){
     let savingAccount = undefined;
     if('income' in account){
         savingAccount =  {
-            accountid: undefined,
+            accountId: undefined,
             income: account.income
         }
     }

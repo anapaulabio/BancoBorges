@@ -8,18 +8,18 @@ export default function (account: any): AccountEntity | undefined {
     return
 
     let entity: IGeneralAccountEntity = {
-        indexId: account.indexId,
+        accountId: account.accountId,
         clientId: account.clientId,
         agency: account.agency,
         accountNumber: account.accountNumber,
         balance: account.balance
     }
 
-    if(account.checkingaccount){
-        (entity as ICheckingAccountEntity).tax = account.checkingaccount.tax;
-        (entity as ICheckingAccountEntity).transferLimit = account.checkingaccount.transferLimit;
-    } else if (account.savingaccount){
-        (entity as ISavingAccountEntity).income = account.savingaccount.income;
+    if(account.checkingAccount){
+        (entity as ICheckingAccountEntity).tax = account.checkingAccount.tax;
+        (entity as ICheckingAccountEntity).transferLimit = account.checkingAccount.transferLimit;
+    } else if (account.savingAccount){
+        (entity as ISavingAccountEntity).income = account.savingAccount.income;
     } else {
         return;
     }

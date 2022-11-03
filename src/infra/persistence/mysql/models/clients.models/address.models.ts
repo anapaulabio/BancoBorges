@@ -4,7 +4,8 @@ import * as Sequelize from 'sequelize';
 export default MysqlDataBase.getInstance().createModel('addresses', {
     addressid: {
         type: Sequelize.DataTypes.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        field: 'address_id'
     },
     cep: Sequelize.DataTypes.STRING,
     logradouro: Sequelize.DataTypes.STRING,

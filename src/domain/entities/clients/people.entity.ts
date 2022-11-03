@@ -1,7 +1,7 @@
 import { IAddressesEntity } from "./address.entity"
 
 export interface IPeopleEntity {
-    indexId?: number,
+    peopleId?: number,
     addresses?: IAddressesEntity,
     cep: string,
     creditLimit: number,

@@ -3,7 +3,7 @@ import * as Sequelize from 'sequelize';
 export default {
     up: (queryInterface: Sequelize.QueryInterface) => {
         return queryInterface.createTable('addresses', {
-            addressesid: {
+            addressesId: {
                 type: Sequelize.DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
@@ -15,7 +15,7 @@ export default {
             bairro: Sequelize.DataTypes.STRING,
             cidade: Sequelize.DataTypes.STRING,
             estado: Sequelize.DataTypes.STRING,
-            peopleid: {
+            peopleId: {
                 type: Sequelize.DataTypes.INTEGER,
                 references: {
                     model: {
@@ -26,4 +26,4 @@ export default {
             } 
         })
     }
-}
+};

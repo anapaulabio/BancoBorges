@@ -21,17 +21,17 @@ export class ClientsRepository implements IClientsRepository {
         private _addressModel: Sequelize.ModelCtor<Sequelize.Model<any, any>>
     ){
         this._peopleModel.hasOne(this._physicalPeopleModel, {
-            foreignKey: 'peopleid',
+            foreignKey: 'peopleId',
             as: 'physicalPeople' 
         });
 
         this._peopleModel.hasOne(this._legalPeopleModel, {
-            foreignKey: 'peopleid',
+            foreignKey: 'peopleId',
             as: 'legalPeople'
         });
 
         this._peopleModel.hasOne(this._addressModel, {
-            foreignKey: 'peopleid',
+            foreignKey: 'peopleId',
             as: 'addresses'
         });
     }
@@ -57,30 +57,30 @@ export class ClientsRepository implements IClientsRepository {
        const peopleModel = await this._database.create(this._peopleModel, people)
 
        if(physicalPeople){
-        physicalPeople.peopleid = peopleModel.null;
+        physicalPeople.peopleId = peopleModel.null;
         const physicalPeopleModel = await this._database.create(this._physicalPeopleModel, physicalPeople)
        }
 
        if(legalPeople){
-        legalPeople.peopleid = peopleModel.null;
+        legalPeople.peopleId = peopleModel.null;
         const legalPeopleModel = await this._database.create(this._legalPeopleModel, legalPeople)
        }
 
        if(addresses){
-        addresses.peopleid = peopleModel.null;
+        addresses.peopleId = peopleModel.null;
         const addressModel = await this._database.create(this._addressModel, addresses)
        }
 
-       resource.indexId = peopleModel.null
+       resource.peopleId = peopleModel.null
 
        return resource
     }
 
     async deleteById(resourceId: number): Promise<void> {
-        this._database.delete(this._physicalPeopleModel, {peopleid: resourceId});
-        this._database.delete(this._legalPeopleModel, {peopleid: resourceId});
-        this._database.delete(this._addressModel, {peopleid: resourceId});
-        this._database.delete(this._peopleModel, {indexId: resourceId});
+        this._database.delete(this._physicalPeopleModel, {peopleId: resourceId});
+        this._database.delete(this._legalPeopleModel, {peopleId: resourceId});
+        this._database.delete(this._addressModel, {peopleId: resourceId});
+        this._database.delete(this._peopleModel, {peopleId: resourceId});
     }
 
     async list(): Promise<ClientsEntity[]> {
@@ -98,7 +98,7 @@ export class ClientsRepository implements IClientsRepository {
     }
 
     async updateById(resource: ClientsEntity): Promise<ClientsEntity | undefined> {
-        const peopleModel = await this._database.read(this._peopleModel, resource.indexId!, {
+        const peopleModel = await this._database.read(this._peopleModel, resource.peopleId!, {
             include: [
                 'physicalPeople',
                 'legalPeople',

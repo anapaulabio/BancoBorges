@@ -5,10 +5,10 @@ import { ClientsEntity } from "../../domain/entities/clients/client.entity"
 import { MysqlDataBase } from "../../infra/persistence/mysql/mysql.database";
 import { IClientsRepository } from "../../domain/repositories/clients.repository.interface";
 
-import peopleModels from "../../infra/persistence/mysql/models/clients.models/people.models";
-import physicalModels from "../../infra/persistence/mysql/models/clients.models/physical.models";
-import legalModels from "../../infra/persistence/mysql/models/clients.models/legal.models";
-import addressesModels from "../../infra/persistence/mysql/models/clients.models/address.models";
+import peopleModels from "../../infra/persistence/mysql/models/clients/people.models";
+import physicalModels from "../../infra/persistence/mysql/models/clients/physical.models";
+import legalModels from "../../infra/persistence/mysql/models/clients/legal.models";
+import addressesModels from "../../infra/persistence/mysql/models/clients/address.models";
 import entityToModel from "../../infra/persistence/mysql/helpers/clients/entityToModel.client.mysql";
 import modelToEntity from "../../infra/persistence/mysql/helpers/clients/modelToEntity.client.mysql";
 

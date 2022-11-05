@@ -8,6 +8,9 @@ export default MysqlDataBase.getInstance().createModel('people', {
         field: 'people_id'
     },
     cep: Sequelize.DataTypes.STRING,
-    creditLimit: Sequelize.DataTypes.NUMBER,
+    creditLimit: {
+        type: Sequelize.DataTypes.NUMBER,
+        field: 'credit_limit'
+    },
     comments: Sequelize.DataTypes.TEXT
 });

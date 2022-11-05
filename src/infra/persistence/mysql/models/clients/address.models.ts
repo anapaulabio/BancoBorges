@@ -2,10 +2,10 @@ import { MysqlDataBase } from "../../mysql.database";
 import * as Sequelize from 'sequelize';
 
 export default MysqlDataBase.getInstance().createModel('addresses', {
-    addressid: {
+    addressesId: {
         type: Sequelize.DataTypes.INTEGER,
         primaryKey: true,
-        field: 'address_id'
+        field: 'addresses_id'
     },
     cep: Sequelize.DataTypes.STRING,
     logradouro: Sequelize.DataTypes.STRING,

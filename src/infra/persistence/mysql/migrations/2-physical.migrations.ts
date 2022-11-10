@@ -9,7 +9,7 @@ export default {
                 autoIncrement: true,
                 field: 'physical_people_id'
             },
-            peopleId: {
+            people_id: {
                 type: Sequelize.DataTypes.INTEGER,
                 references: {
                     model: {
@@ -17,6 +17,7 @@ export default {
                     },
                     key: 'people_id'
                 },
+                field: 'people_id',
             }, 
             name: Sequelize.DataTypes.STRING,
             cpf: Sequelize.DataTypes.STRING

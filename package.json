@@ -7,7 +7,8 @@
     "dev": "sucrase-node src/infra/apis/app/app.ts",
     "start": "tsc && node --unhandled-rejections=strict -r dotenv/config ./dist/infra/apis/app/app.js",
     "debug": "set DEBUG=* && npm run start",
-    "test": "jest"
+    "test": "jest",
+    "mocks": "tsc && node ./dist/infra/persistence/mocks/mocks.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/dotenv": "^8.2.0",
     "@types/sequelize": "^4.28.14",
     "@types/supertest": "^2.0.12",

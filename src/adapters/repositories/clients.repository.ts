@@ -121,6 +121,24 @@ export class ClientsRepository implements IClientsRepository {
         }
         return resource;
     }
+
+    async groupUsersByCep(cep: string): Promise<ClientsEntity> {
+        const usersByCep = await this._database.selectQuery(
+            `
+            SELECT * from people p
+            LEFT JOIN physical_people pf ON pf.people_id = p.people_id
+            LEFT JOIN legal_people pj ON pj.people_id = p.people_id
+            where cep = :cep
+            `,
+            {
+                cep
+            }
+        );
+        return usersByCep[0];
+
+    
+    }
+
 }
 
 export default new ClientsRepository(

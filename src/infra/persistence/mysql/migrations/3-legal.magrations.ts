@@ -9,7 +9,7 @@ export default {
                 autoIncrement: true,
                 field: 'legal_people_id'
             },
-            peopleId: {
+            people_id: {
                 type: Sequelize.DataTypes.INTEGER,
                 references: {
                     model: {
@@ -17,6 +17,7 @@ export default {
                     },
                     key: 'people_id'
                 },
+                field: 'people_id'
             }, 
             socialReason: {
                 type: Sequelize.DataTypes.STRING,

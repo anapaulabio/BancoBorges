@@ -15,7 +15,7 @@ export default {
             bairro: Sequelize.DataTypes.STRING,
             cidade: Sequelize.DataTypes.STRING,
             estado: Sequelize.DataTypes.STRING,
-            peopleId: {
+            people_id: {
                 type: Sequelize.DataTypes.INTEGER,
                 references: {
                     model: {
@@ -23,7 +23,11 @@ export default {
                     },
                     key: 'people_id'
                 },
+                
             } 
         })
+    },
+    down: (queryInterface: Sequelize.QueryInterface)=> {
+        return queryInterface.dropTable('addresses')
     }
 };

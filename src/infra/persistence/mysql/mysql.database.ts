@@ -72,5 +72,15 @@ export class MysqlDataBase implements IDatabaseModel {
             }
         )
     }
+
+    async selectQuery(sql: string, replacements: any) {
+        return await this._adapter.query(
+            sql,
+            {
+                type: Sequelize.QueryTypes.SELECT,
+                replacements: replacements
+            }
+        );   
+    }
 }
 
